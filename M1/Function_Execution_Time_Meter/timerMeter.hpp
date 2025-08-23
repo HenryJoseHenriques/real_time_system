@@ -6,16 +6,9 @@
 using namespace std::chrono;
 
 template <typename Func>
-double timerMeterCPU(Func f, int r);
+double timerMeterCPU(function<void()> f, int r);
 
-// // ---- Benchmark ----
-// void benchMarkCPU(int r = 10) {
-//     unordered_map<string, function<void()>> funcoes;
-//     fillMap();
-//     for (auto& [name, func] : funcoes) {
-//         double t = timerMeterCPU(func, r);
-//         cout << name << " -> " << t << " ns\n";
-//     }
-// }
+template <typename Func>
+void benchMarkCPU(std::unordered_map<std::string, function<void()>> &map,int r = 10);
 
 #endif

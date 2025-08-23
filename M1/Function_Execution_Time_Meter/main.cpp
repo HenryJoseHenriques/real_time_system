@@ -1,42 +1,27 @@
 #include <iostream>
-#include <vector>
-#include "functions.cpp"   // suas funções de benchmark
-#include "timerMeter.cpp"  // sua função timerMeterCPU
-
 using namespace std;
+#include <unordered_map>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <fstream>
+#include <functional>
+#include "C:\Users\Henry\OneDrive\Documents\Formacao\Real_Time_System\Teacher_Support_Material\Codes\FDA_Original_C\pgmfiles.h"
+#include "C:\Users\Henry\OneDrive\Documents\Formacao\Real_Time_System\Teacher_Support_Material\Codes\FDA_Original_C\diff2d.h"
+#include "C:\Users\Henry\OneDrive\Documents\Formacao\Real_Time_System\Teacher_Support_Material\Codes\FDA_Original_C\pgmfiles.c"
+#include "C:\Users\Henry\OneDrive\Documents\Formacao\Real_Time_System\Teacher_Support_Material\Codes\FDA_Original_C\diff2d.c"
+//#include "tableFunctions.hpp"
+//#include "keyValueMap.hpp"   
+//#include "timerMeter.hpp" 
+#include "tableFunctions.cpp"
+#include "keyValueMap.cpp"   
+#include "timerMeter.cpp" 
 
 int main() {
-    int N = 2000; // tamanho do vetor/matriz
-    vector<int> v(N);
-    for(int i = 0; i < N; i++) v[i] = N - i;
-
-    // Wrappers com lambdas para passar no timerMeterCPU
-    auto f1 = [&](){ loopSimples(1e7); };
-    auto f2 = [&](){ bubbleSort(v); };
-    auto f3 = [&](){ multMatriz(200); };
-    auto f4 = [&](){ fibRec(25); };
-    auto f5 = [&](){ fibIter(90); };
-    auto f6 = [&](){ trigPesado(1e6); };
-    auto f7 = [&](){ stlSort(v); };
-
-    cout << "loopSimples -> "
-         << timerMeterCPU(f1, 10) << " ns\n";
-
-    cout << "bubbleSort -> "
-         << timerMeterCPU(f2, 5) << " ns\n";
-
-    cout << "multMatriz -> "
-         << timerMeterCPU(f3, 5) << " ns\n";
-
-    cout << "fibRec(25) -> "
-         << timerMeterCPU(f4, 5) << " ns\n";
-
-    cout << "fibIter(90) -> "
-         << timerMeterCPU(f5, 10) << " ns\n";
-
-    cout << "trigPesado -> "
-         << timerMeterCPU(f6, 5) << " ns\n";
-
-    cout << "stlSort -> "
-         << timerMeterCPU(f7, 10) << " ns\n";
+    std::unordered_map<std::string, function<void()>> map;
+    int r = 30;
+    fillMap(map);
+    benchMarkCPU(map,r);
+    cout << "Teste feito, nehum erro\n";
 }
